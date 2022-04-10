@@ -146,38 +146,38 @@ jobs:
           echo "::set-output name=status::success"
           echo "FIRMWARE=$PWD" >> $GITHUB_ENV
 
-      - name: 上传奶牛快传及webtransfer
-        id: upload
-        if: steps.organizer.outputs.status == 'success' && env.UPLOAD == 'true' && !cancelled()
-        run: |
-          curl -fsSL git.io/file-transfer | sh
-          ./transfer cow --block 2621440 -s -p 64 --no-progress ${{ env.FIRMWARE }} 2>&1 | tee cowtransfer.log
-          echo "::set-output name=cowtransfer::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
-          curl -fsSL git.io/file-transfer | sh
-          ./transfer wet -s -p 16 --no-progress ${{ env.FIRMWARE }} 2>&1 | tee wetransfer.log
-          echo "::set-output name=wetransfer::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
+      # - name: 上传奶牛快传及webtransfer
+      #   id: upload
+      #   if: steps.organizer.outputs.status == 'success' && env.UPLOAD == 'true' && !cancelled()
+      #   run: |
+      #     curl -fsSL git.io/file-transfer | sh
+      #     ./transfer cow --block 2621440 -s -p 64 --no-progress ${{ env.FIRMWARE }} 2>&1 | tee cowtransfer.log
+      #     echo "::set-output name=cowtransfer::$(cat cowtransfer.log | grep https | cut -f3 -d" ")"
+      #     curl -fsSL git.io/file-transfer | sh
+      #     ./transfer wet -s -p 16 --no-progress ${{ env.FIRMWARE }} 2>&1 | tee wetransfer.log
+      #     echo "::set-output name=wetransfer::$(cat wetransfer.log | grep https | cut -f3 -d" ")"
 
-      - name: 版本发布
-        if: steps.organizer.outputs.status == 'success' && env.RELEASE == 'true' && !cancelled()
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-        with:
-          name: ${{ env.RELEASE_NAME }}  ❤️ | ${{ matrix.target }}-OpenWrt 自动编译
-          tag_name: ${{ env.RELEASE_TAG }}
-          body: |
-            ☆ 源码来源: ${{ env.REPO_URL }}
-            ☆ 源码分支: ${{ env.REPO_BRANCH }}
+      # - name: 版本发布
+      #   if: steps.organizer.outputs.status == 'success' && env.RELEASE == 'true' && !cancelled()
+      #   uses: softprops/action-gh-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      #   with:
+      #     name: ${{ env.RELEASE_NAME }}  ❤️ | ${{ matrix.target }}-OpenWrt 自动编译
+      #     tag_name: ${{ env.RELEASE_TAG }}
+      #     body: |
+      #       ☆ 源码来源: ${{ env.REPO_URL }}
+      #       ☆ 源码分支: ${{ env.REPO_BRANCH }}
 
-            🚀 奶牛快传: ${{ steps.upload.outputs.cowtransfer }}
-            🐤 WeTransfer: ${{ steps.upload.outputs.wetransfer }}
+      #       🚀 奶牛快传: ${{ steps.upload.outputs.cowtransfer }}
+      #       🐤 WeTransfer: ${{ steps.upload.outputs.wetransfer }}
 
-            ✨ 当前源码版本:
+      #       ✨ 当前源码版本:
 
-            ${{ env.useVersionInfo }}
-          files: ${{ github.workspace }}/dist/*
+      #       ${{ env.useVersionInfo }}
+      #     files: ${{ github.workspace }}/dist/*
 
-      - name: 微信通知
-        if: steps.organizer.outputs.status == 'success' && env.WECHAT == 'true' && !cancelled()
-        run: |
-          [ ${{ steps.organizer.outputs.status}} == 'success' ] && curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=🎉${{ matrix.target }}编译完成😋|| curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=❌${{ matrix.target }}编译失败😂
+      # - name: 微信通知
+      #   if: steps.organizer.outputs.status == 'success' && env.WECHAT == 'true' && !cancelled()
+      #   run: |
+      #     [ ${{ steps.organizer.outputs.status}} == 'success' ] && curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=🎉${{ matrix.target }}编译完成😋|| curl https://sc.ftqq.com/${{ secrets.SCKEY }}.send?text=❌${{ matrix.target }}编译失败😂
