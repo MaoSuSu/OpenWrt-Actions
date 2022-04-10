@@ -1,10 +1,17 @@
 #!/bin/bash
+#
+# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/P3TERX/Actions-OpenWrt
+# File name: diy-part1.sh
+# Description: OpenWrt DIY script part 1 (Before Update feeds)
+#
 
-# 写入emmc
-git clone https://github.com/tuanqing/install-program package/install-program
-# 主题
-svn co https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom/trunk/luci-theme-infinityfreedom package/luci-theme-infinityfreedom
-# dockerman
-svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman package/luci-app-dockerman
-# dnsfilter
-git clone https://github.com/garypang13/luci-app-dnsfilter.git package/lean/luci-app-dnsfilter
+# Uncomment a feed source
+#sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
+
+# Add a feed source
+echo 'src-git small8 https://github.com/kenzok8/small-package' >>feeds.conf.default
