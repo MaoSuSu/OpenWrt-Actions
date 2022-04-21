@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [K2P, GeHua]
+        target: [K2P, GeHua, AX6]
 
     steps:
       - name: 检出源码

@@ -1,4 +1,4 @@
-# 自动构建 K2P/GeHua OpenWrt 固件脚本
+# 自动构建 K2P/GeHua/AX6 OpenWrt 固件脚本
 
 **每周自动通过 Github Actions 进行云编译，并发布为当日日期版本**
 
