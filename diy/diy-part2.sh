@@ -12,3 +12,6 @@ sed -i 's/OpenWrt/MaoSuOS/g' package/base-files/files/bin/config_generate
 
 # 修改WIFI名
 sed -i 's/OpenWrt/MaoSu/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
+
+# 修改WIFI区域代码
+sed -i 's/US/CN/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
