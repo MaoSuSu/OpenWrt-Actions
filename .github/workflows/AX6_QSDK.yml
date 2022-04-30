@@ -10,8 +10,8 @@ on:
         default: 'false'
 
 env:
-  REPO_URL: https://github.com/MaoSuSu/Openwrt_AX6_QSDK
-  REPO_BRANCH: master
+  REPO_URL: https://github.com/Leo357449107/qsdk_cmiot-ax6
+  REPO_BRANCH: qsdk_11.5.0.6_k4.4
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: AX6.config
   DIY_P1_SH: diy/diy-part1.sh
