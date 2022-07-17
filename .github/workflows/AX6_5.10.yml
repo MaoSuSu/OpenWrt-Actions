@@ -1,4 +1,4 @@
-name: 编译AX6
+name: 编译AX6_5.10
 
 on:
   repository_dispatch:
